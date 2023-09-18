@@ -17,6 +17,10 @@
             font-family: 'Nunito', sans-serif;
         }
 
+        .editContainer {
+            border: 1px solid #dee2e6;
+        }
+
         button {
             border-radius: 10px;
             margin: 5px;

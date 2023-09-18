@@ -18,6 +18,10 @@
             font-family: 'Nunito', sans-serif;
         }
 
+        .mainList {
+            border: 1px solid #dee2e6;
+        }
+
         .todoListItem {
             display: flex;
             flex-direction: row;
