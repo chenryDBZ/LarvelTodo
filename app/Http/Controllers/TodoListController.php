@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TodoListResource;
 use Illuminate\Http\Request;
 use App\Models\TodoItem;
 use Illuminate\Support\Facades\DB;
@@ -62,5 +63,11 @@ class TodoListController extends Controller
         $todoItem->is_complete = 1;
         $todoItem->save();
         return redirect('/');
+    }
+
+    public function getAll() {
+        $todo_all = TodoItem::all();
+
+        return TodoListResource::collection($todo_all);
     }
 }
