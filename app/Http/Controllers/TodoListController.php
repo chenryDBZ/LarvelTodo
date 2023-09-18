@@ -4,24 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TodoItem;
+use Illuminate\Support\Facades\DB;
 
 class TodoListController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('welcome', ['todoItems' => TodoItem::all()]);
     }
 
-    public function editView($id){
-        return view('editview', ['todoItem' => TodoItem::where('id', $id)->get()]);
+    public function editView($id)
+    {
+        return view('editview', ['todoItem' => TodoItem::where('id', $id)->first()]);
     }
 
-    public function todoCompleted(){
+    public function todoCompleted()
+    {
         return view('welcome', ['todoItems' => TodoItem::where('is_complete', 1)->get()]);
     }
 
-    public function todoPending(){
+    public function todoPending()
+    {
         return view('welcome', ['todoItems' => TodoItem::where('is_complete', 0)->get()]);
     }
+
     public function saveItem(Request $request)
     {
         $newTodo = new TodoItem();
@@ -36,7 +42,7 @@ class TodoListController extends Controller
         try {
             TodoItem::where('id', $id)->delete();
             return redirect('/');
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e;
         }
 
@@ -44,10 +50,9 @@ class TodoListController extends Controller
 
     public function editItem(Request $request)
     {
-        $todoItem = TodoItem::find($request->id);
-        $todoItem->name = $request->todoItem;
-        $todoItem->is_complete = $request->is_complete;
-        $todoItem->save();
+        DB::table('todo_items')
+            ->where('id', $request->id)
+            ->update(['name' => $request->name]);
         return redirect('/');
     }
 

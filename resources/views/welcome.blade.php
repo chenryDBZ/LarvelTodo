@@ -22,49 +22,64 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            padding: 5px;
+
+            & label {
+                margin-right: auto;
+            }
+        }
+
+        button{
+            border-radius: 10px;
+            margin: 5px;
         }
     </style>
 </head>
 <body>
+{{ logger(request()) }}
 <div class="mainList container">
     <h1> Todo List </h1>
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" {{ request()->is('') ? 'active' : null }} href="{{ url('/') }}" role="tab">All</a>
+            <a class="nav-link" {{ Request::is("/") ? 'active' : null }} href="{{ url('/') }}" role="tab">All</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               {{ request()->is('todoCompleted') ? 'active' : null }} href="{{ route('todoCompleted') }}" role="tab">Completed</a>
+               {{ Request::is('todoCompleted') ? 'active' : null }} href="{{ route('todoCompleted') }}" role="tab">Completed</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" {{ request()->is('todoPending') ? 'active' : null }} href="{{ route('todoPending') }}"
+            <a class="nav-link" {{ Request::is('todoPending') ? 'active' : null }} href="{{ route('todoPending') }}"
                role="tab">Pending</a>
         </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
 
-        <div class="tab-pane fade show active" id="{{ url('/') }}" role="tabpanel" aria-labelledby="home-tab">
+        <div class="tab-pane fade show active" id="{{ url('/') }}" role="tabpanel">
             @foreach($todoItems as $todoItem)
                 <div class="todoListItem">
-                    <p> Todo item {{$todoItem->id}} : {{$todoItem->name}}</p>
+                    <label> Todo item {{$todoItem->id}} : {{$todoItem->name}}</label>
                     <form method="post" action="{{ route('setComplete', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
                         {{ Form::checkbox('is_complete', 'yes', $todoItem->is_complete) }}
-                        {{ Form::submit('Set Complete')}}
+                        <button type="submit">Set Complete</button>
                     </form>
                     <form method="post" action="{{ route('deleteItem', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
-                        {{ Form::submit('delete')}}
+                        <button type="submit">Delete</button>
+                    </form>
+                    <form method="post" action="{{ route('editView', $todoItem->id) }}" style="">
+                        {{ csrf_field() }}
+                        <button class="btn-check" type="submit">Edit</button>
                     </form>
                 </div>
             @endforeach
         </div>
 
-        <div class="tab-pane fade" id="{{ route('todoCompleted') }}" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade" id="{{ route('todoCompleted') }}" role="tabpanel">
             @foreach($todoItems as $todoItem)
                 <div class="todoListItem">
-                    <p> Todo item {{$todoItem->id}} : {{$todoItem->name}}</p>
+                    <label> Todo item {{$todoItem->id}} : {{$todoItem->name}}</label>
                     <form method="post" action="{{ route('setComplete', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
                         {{ Form::checkbox('is_complete', 'yes', $todoItem->is_complete) }}
@@ -72,16 +87,16 @@
                     </form>
                     <form method="post" action="{{ route('deleteItem', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
-                        {{ Form::submit('delete')}}
+                        <button type="submit">Delete</button>
                     </form>
                 </div>
             @endforeach
         </div>
 
-        <div class="tab-pane fade" id="{{ route('todoPending') }}" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="tab-pane fade" id="{{ route('todoPending') }}" role="tabpanel">
             @foreach($todoItems as $todoItem)
                 <div class="todoListItem">
-                    <p> Todo item {{$todoItem->id}} : {{$todoItem->name}}</p>
+                    <label> Todo item {{$todoItem->id}} : {{$todoItem->name}}</label>
                     <form method="post" action="{{ route('setComplete', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
                         {{ Form::checkbox('is_complete', 'yes', $todoItem->is_complete) }}
@@ -89,7 +104,7 @@
                     </form>
                     <form method="post" action="{{ route('deleteItem', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
-                        {{ Form::submit('delete')}}
+                        <button type="submit">Delete</button>
                     </form>
                 </div>
             @endforeach
