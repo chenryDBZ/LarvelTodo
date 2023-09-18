@@ -29,7 +29,7 @@
             }
         }
 
-        button{
+        button {
             border-radius: 10px;
             margin: 5px;
         }
@@ -61,7 +61,8 @@
                     <label> Todo item {{$todoItem->id}} : {{$todoItem->name}}</label>
                     <form method="post" action="{{ route('setComplete', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
-                        {{ Form::checkbox('is_complete', 'yes', $todoItem->is_complete) }}
+                        <input @if($todoItem->is_complete) checked="checked" @endif name="is_complete" type="checkbox"
+                               value="{{$todoItem->is_complete}}" disabled="disabled">
                         <button type="submit">Set Complete</button>
                     </form>
                     <form method="post" action="{{ route('deleteItem', $todoItem->id) }}" style="">
@@ -82,7 +83,8 @@
                     <label> Todo item {{$todoItem->id}} : {{$todoItem->name}}</label>
                     <form method="post" action="{{ route('setComplete', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
-                        {{ Form::checkbox('is_complete', 'yes', $todoItem->is_complete) }}
+                        <input @if($todoItem->is_complete) checked="checked" @endif name="is_complete" type="checkbox"
+                               value="{{$todoItem->is_complete}}" disabled="disabled">
                         {{ Form::submit('Set Complete')}}
                     </form>
                     <form method="post" action="{{ route('deleteItem', $todoItem->id) }}" style="">
@@ -99,7 +101,8 @@
                     <label> Todo item {{$todoItem->id}} : {{$todoItem->name}}</label>
                     <form method="post" action="{{ route('setComplete', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
-                        {{ Form::checkbox('is_complete', 'yes', $todoItem->is_complete) }}
+                        <input @if($todoItem->is_complete) checked="checked" @endif name="is_complete" type="checkbox"
+                               value="{{$todoItem->is_complete}}" disabled="disabled">
                         {{ Form::submit('Set Complete')}}
                     </form>
                     <form method="post" action="{{ route('deleteItem', $todoItem->id) }}" style="">
