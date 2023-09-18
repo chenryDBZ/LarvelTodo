@@ -27,6 +27,7 @@
             flex-direction: row;
             align-items: center;
             padding: 5px;
+            border-bottom: 1px solid #dee2e6;
 
             & label {
                 margin-right: auto;
@@ -121,8 +122,8 @@
 
     <form method="post" action="{{ route('saveItem') }}">
         {{ csrf_field() }}
-        <label for="todoItem"> Todo Item </label> </br>
-        {{ Form::text('todoItem') }}
+        <label for="todoItem"> New Item
+            {{ Form::text('todoItem') }}</label>
         <button type="submit">Save</button>
     </form>
 </div>
