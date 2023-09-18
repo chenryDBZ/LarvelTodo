@@ -27,7 +27,6 @@
 <div class="editContainer container">
     <h1 style="border-bottom: 1px solid #dee2e6;">Edit Item : {{ $todoItem->id }}</h1>
     <div class="todoItemView">
-        {{ logger(gettype($todoItem)) }}
         <form method="post" action="{{ route('editItem', $todoItem->id) }}">
             {{ csrf_field() }}
             {{ Form::text('name', $todoItem->name) }}

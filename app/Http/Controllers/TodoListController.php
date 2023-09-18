@@ -51,9 +51,10 @@ class TodoListController extends Controller
 
     public function editItem(Request $request)
     {
+        $request->is_complete = $request->has('is_complete');
         DB::table('todo_items')
             ->where('id', $request->id)
-            ->update(['name' => $request->name]);
+            ->update(['name' => $request->name, 'is_complete' => $request->is_complete]);
         return redirect('/');
     }
 
