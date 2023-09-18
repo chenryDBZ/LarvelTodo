@@ -41,14 +41,14 @@
     <h1> Todo List </h1>
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" {{ Request::is("/") ? 'active' : null }} href="{{ url('/') }}" role="tab">All</a>
+            <a class="nav-link {{ Request::is("/") ? 'active' : null }}" href="{{ url('/') }}" role="tab">All</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"
-               {{ Request::is('todoCompleted') ? 'active' : null }} href="{{ route('todoCompleted') }}" role="tab">Completed</a>
+            <a class="nav-link
+               {{ Request::is('todoCompleted') ? 'active' : null }}" href="{{ route('todoCompleted') }}" role="tab">Completed</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" {{ Request::is('todoPending') ? 'active' : null }} href="{{ route('todoPending') }}"
+            <a class="nav-link {{ Request::is('todoPending') ? 'active' : null }}" href="{{ route('todoPending') }}"
                role="tab">Pending</a>
         </li>
     </ul>
