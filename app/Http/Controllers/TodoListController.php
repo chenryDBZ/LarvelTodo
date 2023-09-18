@@ -43,7 +43,7 @@ class TodoListController extends Controller
             TodoItem::where('id', $id)->delete();
             return redirect('/');
         } catch (\Exception $e) {
-            return $e;
+            return $e->getMessage();
         }
 
     }
