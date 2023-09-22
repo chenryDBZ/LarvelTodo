@@ -11,21 +11,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .editContainer {
-            border: 1px solid #dee2e6;
-        }
-
-        button {
-            border-radius: 10px;
-            margin: 5px;
-        }
-    </style>
 </head>
 <body>
 <div class="editContainer container">
@@ -34,6 +19,7 @@
         <form method="post" action="{{ route('editItem', $todoItem->id) }}">
             {{ csrf_field() }}
             {{ Form::text('name', $todoItem->name) }}
+            <label for="is_complete"></label>
             {{ Form::checkbox('is_complete', 'yes', $todoItem->is_complete) }}
             {{ Form::submit('Save')}}
         </form>
