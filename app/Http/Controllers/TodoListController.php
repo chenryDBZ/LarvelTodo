@@ -19,7 +19,11 @@ class TodoListController extends Controller
 
     public function editView($id)
     {
-        return view('editview', ['todoItem' => TodoItem::where('id', $id)->first()]);
+        $item = TodoItem::where('id', $id)->first();
+        if (!$item) {
+            return 'Item Not Found';
+        }
+        return view('editview', ['todoItem' => $item]);
     }
 
     public function todoCompleted()
@@ -69,7 +73,8 @@ class TodoListController extends Controller
         return redirect('/');
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         $todo_all = TodoItem::all();
 
         return TodoListResource::collection($todo_all);
