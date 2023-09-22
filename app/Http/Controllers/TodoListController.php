@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTodoRequest;
+use App\Http\Requests\UpdateTodoRequest;
 use App\Http\Resources\TodoListResource;
 use Illuminate\Http\Request;
 use App\Models\TodoItem;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class TodoListController extends Controller
 {
@@ -29,12 +32,11 @@ class TodoListController extends Controller
         return view('welcome', ['todoItems' => TodoItem::where('is_complete', 0)->get()]);
     }
 
-    public function saveItem(Request $request)
+    public function saveItem(StoreTodoRequest $request)
     {
-        $newTodo = new TodoItem();
-        $newTodo->name = $request->todoItem;
-        $newTodo->is_complete = 0;
-        $newTodo->save();
+
+        TodoItem::create($request->validated());
+
         return redirect('/');
     }
 
@@ -49,12 +51,13 @@ class TodoListController extends Controller
 
     }
 
-    public function editItem(Request $request)
+    public function editItem(UpdateTodoRequest $request)
     {
         $request->is_complete = $request->has('is_complete');
-        DB::table('todo_items')
-            ->where('id', $request->id)
-            ->update(['name' => $request->name, 'is_complete' => $request->is_complete]);
+
+        $item = TodoItem::find($request->id);
+        $item->update($request->validated());
+
         return redirect('/');
     }
 

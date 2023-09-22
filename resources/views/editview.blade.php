@@ -16,6 +16,16 @@
 <body>
 <div class="editContainer container">
     <h1 style="border-bottom: 1px solid #dee2e6;">Edit Item : {{ $todoItem->id }}</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="todoItemView">
         <form method="post" action="{{ route('editItem', $todoItem->id) }}">
             {{ csrf_field() }}

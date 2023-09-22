@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel Todo List</title>
-
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -33,6 +31,15 @@
     </ul>
 
     <div class="tab-content" id="myTabContent">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class="tab-pane fade show active" id="{{ url('/') }}" role="tabpanel">
             @foreach($todoItems as $todoItem)
@@ -48,7 +55,7 @@
                         {{ csrf_field() }}
                         <button type="submit">Delete</button>
                     </form>
-                    <form method="post" action="{{ route('editView', $todoItem->id) }}" style="">
+                    <form method="get" action="{{ route('editView', $todoItem->id) }}" style="">
                         {{ csrf_field() }}
                         <button class="btn-check" type="submit">Edit</button>
                     </form>
@@ -96,8 +103,8 @@
 
     <form method="post" action="{{ route('saveItem') }}">
         {{ csrf_field() }}
-        <label for="todoItem"> New Item
-            {{ Form::text('todoItem') }}</label>
+        <label for="name"> New Item
+            {{ Form::text('name') }}</label>
         <button type="submit">Save</button>
     </form>
 </div>
