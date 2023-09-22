@@ -12,33 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .mainList {
-            border: 1px solid #dee2e6;
-        }
-
-        .todoListItem {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 5px;
-            border-bottom: 1px solid #dee2e6;
-
-            & label {
-                margin-right: auto;
-            }
-        }
-
-        button {
-            border-radius: 10px;
-            margin: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/todo.css')}}">
 </head>
 <body>
 

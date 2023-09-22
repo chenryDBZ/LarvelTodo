@@ -1,0 +1,24 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.mainList, .editContainer {
+    border: 1px solid #dee2e6;
+}
+
+.todoListItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #dee2e6;
+
+    & label {
+        margin-right: auto;
+    }
+}
+
+button {
+    border-radius: 10px;
+    margin: 5px;
+}
